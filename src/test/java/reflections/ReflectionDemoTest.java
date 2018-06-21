@@ -6,12 +6,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import reflextions.ReflectionDemo;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class ReflectionDemoTest{
-
 
     @Test
     public void testGetCountOfHumanAndDerives() {
@@ -22,7 +21,7 @@ public class ReflectionDemoTest{
             add(new Student("2", "2", "2", 10, "2"));
             add(new Human("1", "1", "1", 10));
         }};
-        Assert.assertEquals(4, ReflectionDemo.getCountOfHuman(list));
+        assertEquals(4, ReflectionDemo.getCountOfHuman(list));
     }
 
     @Test
@@ -41,7 +40,7 @@ public class ReflectionDemoTest{
         }};
         List<String> actual = ReflectionDemo.getNamesOfPublicMethods(o);
         Assert.assertTrue(actual.containsAll(expected));
-        Assert.assertEquals(actual.size(), expected.size());
+        assertEquals(actual.size(), expected.size());
     }
 
     @Test
@@ -51,6 +50,24 @@ public class ReflectionDemoTest{
             add("Human");
             add("Object");
         }};
-        Assert.assertEquals(expected, ReflectionDemo.getAllSuperclasses(student));
+        assertEquals(expected, ReflectionDemo.getAllSuperclasses(student));
+    }
+
+    @Test
+    public void testCalcExecutable() {
+        List<Object> list = new ArrayList<Object>() {{
+            add(new Object());
+            add(new Human("1", "1", "1", 10));
+            add(new Student("2", "2", "2", 10, "faculty1"));
+            add(new Student("2", "2", "2", 10, "faculty2"));
+        }};
+        Assert.assertEquals(2, ReflectionDemo.calkExecutable(list));
+    }
+
+    @Test
+    public void testListGetOrSet() {
+        List<String> list = ReflectionDemo.listGetOrSet(new Student("2", "2", "2", 10, "fio1"));
+        System.out.println(list);
+        Assert.assertEquals(10, list.size());
     }
 }

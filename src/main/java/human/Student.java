@@ -1,7 +1,9 @@
 package human;
 
+import interfaces.Executable;
+
 //5. *Создайте класс Student, производный от Human, новое поле — название факультета
-public class Student extends Human {
+public class Student extends Human implements Executable {
     // название факультета
     private String faculty;
 
@@ -12,6 +14,7 @@ public class Student extends Human {
 //
     public Student(String surname, String name, String patronymic, int age, String faculty) {
         super(surname, name, patronymic, age);
+        this.faculty = faculty;
     }
 
     public String getFaculty() {
@@ -20,5 +23,10 @@ public class Student extends Human {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    @Override
+    public void execute() {
+        System.out.println("Student = " + faculty);
     }
 }

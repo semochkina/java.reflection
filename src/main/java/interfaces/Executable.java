@@ -1,7 +1,5 @@
 package interfaces;
 
-public interface Executable {
-
-    public void execute();
-
+public interface Executable  {
+    void execute();
 }
