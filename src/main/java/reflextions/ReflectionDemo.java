@@ -36,14 +36,10 @@ public class ReflectionDemo {
     //Напишите метод, который для списка объектов находит его элементы, реализующие этот интерфейс, и выполняет в таких объектах метод execute().
     //Метод возвращает количество найденных элементов.
     public static long calkExecutable(List<Object> objects) {
-        long result = 0;
-        for (Object obj : objects) {
-            if (obj instanceof Executable) {
-                ((Executable) obj).execute();
-                result++;
-            }
-        }
-        return result;
+        return objects == null ? 0 : objects.stream()
+                .filter(r -> r instanceof Executable)
+                .peek(r -> ((Executable) r).execute())
+                .count();
     }
 
     // Для объекта получить список его геттеров и сеттеров (в виде списка строк с заголовками методов).
